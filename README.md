@@ -3,7 +3,12 @@ Sniff. Bark. Match. Confuse.
 
 Finally, a social network for dogs that's more complicated than it needs to be.
 
-Live Demo 👉 https://sniffer1.onrender.com/  
+Live Demo 👉 https://sniffer1.onrender.com/
+
+Demo video👉 Google drive-- https://drive.google.com/file/d/1pN0A211uWYxp1GybXS-qoL65BB1Pm4fA/view?usp=sharing
+
+Dropbox--https://www.dropbox.com/scl/fi/k6dmtwlco0oyle6drur9s/Screen-Recording-2025-08-22-223046.mp4?rlkey=uvuziqekk73er8sf3ywek3mvg&st=72qv99n6&dl=0
+
 
 About The Project
 Sniffer is a satirical, front-end project that imagines a social media app designed exclusively for dogs. It's a humorous take on modern dating apps and social networks, complete with over-the-top features and a quirky design. This project is built with plain HTML, CSS, and vanilla JavaScript to create a fun, interactive, and fully client-side web experience.
