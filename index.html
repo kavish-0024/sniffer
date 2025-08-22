@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sniffer - The Dog Social Network</title>
+    <link rel="stylesheet" href="sniffer.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">🐕 SNIFFER</div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#" onclick="showSniffMatch()">Sniff Match™</a>
+                    <a href="#" onclick="showDogProfiles()">Dog Profiles</a>
+                    <a href="#" onclick="showWoofChat()">Woof Chat</a>
+                    <a href="#testimonials">Woofs</a>
+                    <a href="#stats">Stats</a>
+                    <a href="#download">Download</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SNIFFER</h1>
+            <div class="tagline">Sniff. Bark. Match. Confuse.</div>
+            <div class="subtitle">Finally, a social network for dogs that's more complicated than it needs to be.</div>
+            <button class="cta-button" onclick="showSniffMatch()">Start Sniffing</button>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Features</h2>
+            <div class="features-grid">
+                </div>
+            </div>
+    </section>
+
+    <section class="live-feed">
+        <div class="container">
+            <h2 class="section-title">Live Sniffing Activity</h2>
+            <div class="activity-feed" id="activityFeed">
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title">Impressive Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-number" id="sniffCount">100,247</span>
+                    <span class="stat-label">Sniffed Butts</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="confusionLevel">95%</span>
+                    <span class="stat-label">Confusion Rate</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="userCount">1</span>
+                    <span class="stat-label">Active User</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="barkCount">42,069</span>
+                    <span class="stat-label">Meaningless Barks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Dogs Are Barking About</h2>
+            <div class="testimonials-grid">
+                </div>
+        </div>
+    </section>
+
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Download the App That Doesn't Exist</h2>
+            <p>Available on all platforms that matter (none)</p>
+
+            <div class="app-badges">
+
+                <a href="#" class="badge" onclick="fakeDownload('Doggie Play')">🤖 Doogle Play</a>
+                <a href="#" class="badge" onclick="fakeDownload('Dog Store')">🐕 Dog Store</a>
+            </div>
+
+            <div class="qr-code" onclick="rickRoll()">
+                <span style="color: #ffeb3b; font-size: 1rem;"><img src="WhatsApp Image 2025-08-22 at 00.48.39_da1081ba.jpg" alt="" style="width: 190px;height: 190px;"></span>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" onclick="alert('These are bone terms!')">Bone Terms & Conditions</a>
+                <a href="#" onclick="alert('Your privacy is furry secure!')">Privacy Furlicy</a>
+                <a href="#" onclick="reportCat()">Report a Cat</a>
+                <a href="#" onclick="alert('Woof support incoming!')">Woof Support</a>
+            </div>
+
+            <div class="social-icons">
+                <div class="social-icon" onclick="alert('Pawbook coming soon!')">🐾</div>
+                <div class="social-icon" onclick="alert('Pawgram - visual sniffing!')">🐾</div>
+                <div class="social-icon" onclick="alert('Pawter - micro barking!')">🐾</div>
+                <div class="social-icon" onclick="alert('WoofedIn - professional sniffing!')">🐾</div>
+            </div>
+
+            <p style="margin-top: 30px; opacity: 0.7;">
+                © 2025 Sniffer Inc. All barks reserved. OfCourse cats were harmed in the making of this app.
+            </p>
+        </div>
+    </footer>
+
+    <div class="sniff-modal" id="sniffModal">
+        <div class="sniff-container">
+            <button class="close-sniff" onclick="closeSniffMatch()">×</button>
+            <div class="dog-card" id="dogCard">
+                <div class="swipe-indicator sniff" id="sniffIndicator">👃 SNIFF!</div>
+                <div class="swipe-indicator pass" id="passIndicator">👎 PASS!</div>
+                <div class="dog-photo" id="dogPhoto">🐕</div>
+                <div class="dog-name" id="dogName">Loading...</div>
+                <div class="dog-breed" id="dogBreed">Breed Unknown</div>
+                <div class="dog-bio" id="dogBio">Preparing profile...</div>
+                <div class="dog-stats">
+                    <div class="dog-stat">
+                        <div class="stat-label">Sniff Appeal</div>
+                        <div class="stat-value" id="sniffAppeal">?/10</div>
+                    </div>
+                    <div class="dog-stat">
+                        <div class="stat-label">Chaos Level</div>
+                        <div class="stat-value" id="chaosLevel">?/10</div>
+                    </div>
+                    <div class="dog-stat">
+                        <div class="stat-label">Treat Obsession</div>
+                        <div class="stat-value" id="treatLevel">?/10</div>
+                    </div>
+                    <div class="dog-stat">
+                        <div class="stat-label">Philosophy IQ</div>
+                        <div class="stat-value" id="philosophyIQ">?/10</div>
+                    </div>
+                </div>
+                <div class="swipe-actions">
+                    <button class="swipe-btn pass-btn" onclick="passDog()">👎 Pass</button>
+                    <button class="swipe-btn sniff-btn" onclick="sniffDog()">👃 Sniff</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="match-notification" id="matchNotification">
+        🎉 IT'S A SNIFF! 🎉<br>
+        <div style="font-size: 1rem; margin-top: 10px;">You both confused each other!</div>
+    </div>
+
+    <div class="message-overlay" id="messageOverlay">
+        <div class="message-card">
+            <div class="floating-hearts" id="floatingHearts"></div>
+            <div class="message-icon" id="messageIcon">🐕</div>
+            <div class="message-title" id="messageTitle">Loading...</div>
+            <div class="message-text" id="messageText">Preparing your destiny...</div>
+            <button class="message-continue" onclick="closeMessageOverlay()">Continue Your Journey</button>
+        </div>
+    </div>
+
+    <div class="profiles-modal" id="profilesModal">
+        <div class="profiles-header">
+            <div class="profiles-title">🐕 Dog Profiles Online</div>
+            <button class="close-profiles" onclick="closeDogProfiles()">×</button>
+        </div>
+        <div class="profiles-grid" id="profilesGrid">
+        </div>
+    </div>
+
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-header">
+            <div class="chat-title">💬 Woof Chat - Matched Dogs</div>
+            <button class="close-chat" onclick="closeWoofChat()">×</button>
+        </div>
+        <div class="chat-container">
+            <div class="chat-sidebar">
+                <div id="matchesList">
+                </div>
+            </div>
+            <div class="chat-main">
+                <div id="chatContent" class="no-selection">
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 20px;">🐕💬</div>
+                        <div>Select a matched dog to start woofing!</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">
+                            Warning: All conversations are just you talking to yourself.<br>
+                            This is peak privacy technology.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="sniffer.js"></script>
+</body>
+</html>
