@@ -1,270 +1,350 @@
-// Sniff Match functionality
-const dogProfiles = [
-  {
-    "name": "Sheru, the CEO of Barks",
-    "breed": "Chief Barketing Officer",
-    "emoji": "😎",
-    "bio": "I'm in charge of loud negotiations with the mail carrier and strategic nap placement. My barks have an ROI of 'Guaranteed Snacks.'",
-    "sniffAppeal": 8,
-    "chaosLevel": 9,
-    "treatLevel": 10,
-    "philosophyIQ": 6
-  },
-  {
-    "name": "Swami Zoom-ananda",
-    "breed": "Quantum Zoomie Specialist",
-    "emoji": "💨",
-    "bio": "I can exist in multiple places at once, primarily the kitchen and wherever you just opened a bag of chips. I am the reason we have nice things in shreds.",
-    "sniffAppeal": 7,
-    "chaosLevel": 10,
-    "treatLevel": 9,
-    "philosophyIQ": 4
-  },
-  {
-    "name": "The Paneer Inspector",
-    "breed": "Slobbery Tithe Hound",
-    "emoji": "🧀",
-    "bio": "I possess a sixth sense for the crinkle of a cheese wrapper from three rooms away. You are legally and morally obligated to pay the tax. It's the law.",
-    "sniffAppeal": 6,
-    "chaosLevel": 3,
-    "treatLevel": 10,
-    "philosophyIQ": 5
-  },
-  {
-    "name": "Chowkidar Charan",
-    "breed": "Head of Neighborhood Watch",
-    "emoji": "📢",
-    "bio": "A leaf fell two blocks away. A cat thought about crossing the street. The wind blew. I've reported all incidents. You're welcome.",
-    "sniffAppeal": 5,
-    "chaosLevel": 8,
-    "treatLevel": 7,
-    "philosophyIQ": 2
-  },
-  {
-    "name": "Moti Maharaj",
-    "breed": "Professional Loaf of Bread",
-    "emoji": "🍞",
-    "bio": "My legs are short, which makes my dramatic sploots even more impressive. My hobbies include judging you and demanding passage via belly rubs.",
-    "sniffAppeal": 9,
-    "chaosLevel": 2,
-    "treatLevel": 8,
-    "philosophyIQ": 7
-  },
-  {
-    "name": "Toofan Express",
-    "breed": "Unsupervised Intern Retriever",
-    "emoji": "💥",
-    "bio": "My two brain cells are competing for third place. I specialize in running into walls with grace and looking surprised by my own feet.",
-    "sniffAppeal": 10,
-    "chaosLevel": 10,
-    "treatLevel": 10,
-    "philosophyIQ": 1
-  },
-  {
-    "name": "Joota Chor",
-    "breed": "Long-Bodied Sock Gremlin",
-    "emoji": "🧦",
-    "bio": "Your socks are my treasure. My hoard is legendary and slightly damp. I will trade one (1) chewed sock for three (3) treats. Non-negotiable.",
-    "sniffAppeal": 7,
-    "chaosLevel": 9,
-    "treatLevel": 9,
-    "philosophyIQ": 3
-  },
-  {
-    "name": "Nawab of Naps",
-    "breed": "Professional Sunbeam Inspector",
-    "emoji": "😴",
-    "bio": "My ears are long, my motivation is short. My day is booked solid with naps, followed by strategic repositioning for more naps. Do not disturb the king.",
-    "sniffAppeal": 6,
-    "chaosLevel": 1,
-    "treatLevel": 5,
-    "philosophyIQ": 8
-  },
-  {
-    "name": "Begum Baddimaash",
-    "breed": "Professional Lap Warmer",
-    "emoji": "👑",
-    "bio": "I'm not allowed on the couch, which is why I'm always on the couch. I am 98% fluff, 2% spite. I require constant adoration and zero personal space.",
-    "sniffAppeal": 9,
-    "chaosLevel": 3,
-    "treatLevel": 6,
-    "philosophyIQ": 7
-  },
-  {
-    "name": "Guruji of Ghar-Ghar",
-    "breed": "Wrinkled Gremlin of Joy",
-    "emoji": "🧙",
-    "bio": "I breathe like a freight train and run like a bowling ball. My face has more folds than your laundry. Seeking someone who appreciates the symphony of my snores.",
-    "sniffAppeal": 8,
-    "chaosLevel": 7,
-    "treatLevel": 9,
-    "philosophyIQ": 4
-  },
-  {
-    "name": "Kichad Khan",
-    "breed": "Dirt Worshipping Doodle",
-    "emoji": " M",
-    "bio": "Just had a bath, so it's time to find the nearest puddle. I believe true beauty is a fresh coat of mud. My art is temporary and usually on the white carpet.",
-    "sniffAppeal": 6,
-    "chaosLevel": 9,
-    "treatLevel": 8,
-    "philosophyIQ": 3
-  },
-  {
-    "name": "Badshah of Bhonk",
-    "breed": "Operatic Fluff Dragon",
-    "emoji": "🎤",
-    "bio": "A-WOO! I sing the song of my people, especially when you're on a Zoom call or trying to sleep. I contain multitudes, and all of them are loud.",
-    "sniffAppeal": 8,
-    "chaosLevel": 8,
-    "treatLevel": 6,
-    "philosophyIQ": 5
-  },
-  {
-    "name": "Bhukkad Singh",
-    "breed": "Mobile Garbage Disposal Unit",
-    "emoji": "🗑️",
-    "bio": "If you drop it, I will eat it. If you don't drop it, I will stare with profound sadness until you do. My stomach is a bottomless pit of optimism.",
-    "sniffAppeal": 9,
-    "chaosLevel": 5,
-    "treatLevel": 10,
-    "philosophyIQ": 1
-  },
-  {
-    "name": "Cheeku the Destroyer",
-    "breed": "Unexploded Fluff Bomb",
-    "emoji": "🎯",
-    "bio": "My mission is to find the squeaker in every toy and silence it. Permanently. I operate with speed, fury, and a complete disregard for stuffing.",
-    "sniffAppeal": 7,
-    "chaosLevel": 10,
-    "treatLevel": 8,
-    "philosophyIQ": 2
-  },
-  {
-    "name": "Raju Ras-tapka",
-    "breed": "Emotionally Damp Mastiff",
-    "emoji": "🤤",
-    "bio": "My love language is leaving a trail of slobber on your clean pants. I'm a gentle giant whose primary export is drool. It's how I show affection.",
-    "sniffAppeal": 4,
-    "chaosLevel": 2,
-    "treatLevel": 9,
-    "philosophyIQ": 6
-  }
-];
-
-let currentDogIndex = 0;
-let isDragging = false;
-let startX = 0;
-let currentX = 0;
-
-function showSniffMatch() {
-    document.getElementById('sniffModal').classList.add('active');
-    loadNewDog();
-}
-
-function closeSniffMatch() {
-    document.getElementById('sniffModal').classList.remove('active');
-}
-
-function loadNewDog() {
-    const dog = dogProfiles[currentDogIndex % dogProfiles.length];
-    const card = document.getElementById('dogCard');
-    const sniffIndicator = document.getElementById('sniffIndicator');
-    const passIndicator = document.getElementById('passIndicator');
-    card.className = 'dog-card';
-    card.style.cssText = '';
-    sniffIndicator.classList.remove('show');
-    passIndicator.classList.remove('show');
-    document.getElementById('dogPhoto').textContent = dog.emoji;
-    document.getElementById('dogName').textContent = dog.name;
-    document.getElementById('dogBreed').textContent = dog.breed;
-    document.getElementById('dogBio').textContent = dog.bio;
-    document.getElementById('sniffAppeal').textContent = dog.sniffAppeal + '/10';
-    document.getElementById('chaosLevel').textContent = dog.chaosLevel + '/10';
-    document.getElementById('treatLevel').textContent = dog.treatLevel + '/10';
-    document.getElementById('philosophyIQ').textContent = dog.philosophyIQ + '/10';
-    currentDogIndex++;
-}
-
-// Global app state
+// Enhanced Global App State
+let userDog = null;
+let selectedEmoji = '🐕';
 let onlineDogs = [];
 let matchedDogs = [];
 let currentChatDog = null;
 let chatHistory = {};
+let advancedStats = {
+    totalSniffs: 2547891,
+    successfulMatches: 458372,
+    confusionLevel: 94.7,
+    activeUsers: 127845,
+    averageWoofs: 47.3,
+    treatsMentioned: 892156,
+    existentialCrises: 34521,
+    socksStolenToday: 1247,
+    mailmenConfused: 678,
+    squirrelsSpotted: 9834
+};
 
-// Initialize online dogs and matches
+// Revolutionary Features Data
+const revolutionaryFeatures = [
+    {
+        icon: "🧠",
+        title: "AI Sniff Prediction",
+        description: "Our quantum algorithms predict which butts your dog will sniff next with 73% accuracy (22% better than your dog's own predictions)."
+    },
+    {
+        icon: "🎯",
+        title: "Chaos Level Matching",
+        description: "Match dogs based on their destruction patterns. Find your perfect partner in crimes against furniture and footwear."
+    },
+    {
+        icon: "🔮",
+        title: "Existential Crisis Support",
+        description: "24/7 philosophical counseling for dogs questioning their purpose, the meaning of 'fetch,' and why humans leave every day."
+    },
+    {
+        icon: "📊",
+        title: "Tail Wag Analytics",
+        description: "Advanced metrics tracking happiness levels, treat-to-wag ratios, and the statistical significance of your dog's emotional states."
+    },
+    {
+        icon: "🎵",
+        title: "Bark Translation Engine",
+        description: "Convert your dog's barks into meaningful poetry. Most translations involve food, confusion, or profound observations about mailmen."
+    },
+    {
+        icon: "🌐",
+        title: "Interdimensional Sniffing",
+        description: "Connect with dogs across parallel universes where treats grow on trees and cats are the confused ones."
+    }
+];
+
+// Enhanced Dog Profiles
+const dogProfiles = [
+    {
+        id: "dog_001",
+        name: "Professor Woofington",
+        breed: "PhD in Treat Sciences",
+        emoji: "🎓",
+        bio: "I have three degrees in belly rub optimization and a minor in sock theft. Currently researching the correlation between treat frequency and tail velocity.",
+        sniffAppeal: 9,
+        chaosLevel: 7,
+        treatLevel: 10,
+        philosophyIQ: 10,
+        status: "Online",
+        lastSeen: "Active now"
+    },
+    {
+        id: "dog_002",
+        name: "Captain Chaos McKnockover",
+        breed: "Professional Destruction Artist",
+        emoji: "💥",
+        bio: "I specialize in turning organized spaces into abstract art installations. My masterpiece was a living room that looked like a tornado hit a toy store.",
+        sniffAppeal: 8,
+        chaosLevel: 10,
+        treatLevel: 9,
+        philosophyIQ: 3,
+        status: "Creating chaos",
+        lastSeen: "2m ago"
+    },
+    {
+        id: "dog_003",
+        name: "Zen Master Biscuit",
+        breed: "Enlightened Nap Guru",
+        emoji: "🧘",
+        bio: "I have achieved perfect harmony between sleeping and eating. My meditation sessions consist of 18-hour naps interrupted only by treat opportunities.",
+        sniffAppeal: 7,
+        chaosLevel: 1,
+        treatLevel: 8,
+        philosophyIQ: 9,
+        status: "Meditating",
+        lastSeen: "15m ago"
+    },
+    {
+        id: "dog_004",
+        name: "Detective Sniff Holmes",
+        breed: "Professional Sock Investigator",
+        emoji: "🔍",
+        bio: "No missing sock is safe from my investigative prowess. I have a 100% success rate in finding and relocating footwear to undisclosed locations.",
+        sniffAppeal: 9,
+        chaosLevel: 6,
+        treatLevel: 7,
+        philosophyIQ: 8,
+        status: "On a case",
+        lastSeen: "5m ago"
+    },
+    {
+        id: "dog_005",
+        name: "Lady Fluffington the Dramatic",
+        breed: "Award-winning Drama Queen",
+        emoji: "👑",
+        bio: "Every minor inconvenience is a Shakespearean tragedy. I have perfected the art of the dramatic sigh and the guilt-inducing stare.",
+        sniffAppeal: 10,
+        chaosLevel: 4,
+        treatLevel: 9,
+        philosophyIQ: 6,
+        status: "Being dramatic",
+        lastSeen: "8m ago"
+    },
+    {
+        id: "dog_006",
+        name: "Rocket the Zoomie Champion",
+        breed: "Olympic Zoomie Gold Medalist",
+        emoji: "🚀",
+        bio: "I hold three world records in random bursts of energy. My specialty is the 3 AM apartment sprint and the post-bath victory lap.",
+        sniffAppeal: 8,
+        chaosLevel: 10,
+        treatLevel: 10,
+        philosophyIQ: 2,
+        status: "Zooming",
+        lastSeen: "1m ago"
+    }
+];
+
+// Advanced Activities
+const advancedActivities = [
+    "solved the mystery of the disappearing treats (it was me)",
+    "conducted a philosophical debate with their reflection",
+    "achieved enlightenment through belly rubs",
+    "discovered that vacuum cleaners are actually treat-stealing demons",
+    "invented a new form of interpretive barking",
+    "established diplomatic relations with the neighbor's cat",
+    "completed a PhD thesis on optimal napping positions",
+    "revolutionized the sock hiding industry",
+    "decoded the secret language of doorbell sounds",
+    "mastered the art of guilt-trip staring",
+    "developed a new theory on treat gravity",
+    "became a certified chaos engineer",
+    "discovered the fountain of eternal zoomies",
+    "achieved perfect synchronization with dinner time",
+    "invented quantum entanglement with their favorite human"
+];
+
+// Initialize Enhanced App
+function initializeApp() {
+    populateFeatures();
+    initializeAdvancedStats();
+    initializeDogData();
+    initializeMatchedDogs();
+    initializeActivityFeed();
+    startAdvancedUpdates();
+}
+
+// Populate Features
+function populateFeatures() {
+    const grid = document.getElementById('featuresGrid');
+    revolutionaryFeatures.forEach(feature => {
+        const card = document.createElement('div');
+        card.className = 'feature-card';
+        card.innerHTML = `
+            <div class="feature-icon">${feature.icon}</div>
+            <h3>${feature.title}</h3>
+            <p>${feature.description}</p>
+        `;
+        card.onclick = () => {
+            alert(`🚀 ${feature.title}: Coming soon to a confused dog near you! Currently in beta testing with very good boys and girls.`);
+        };
+        grid.appendChild(card);
+    });
+}
+
+// Initialize Advanced Stats
+function initializeAdvancedStats() {
+    const statsContainer = document.getElementById('advancedStats');
+    const statsData = [
+        { number: advancedStats.totalSniffs.toLocaleString(), label: "Total Sniffs", desc: "Global sniffing activity since launch" },
+        { number: advancedStats.successfulMatches.toLocaleString(), label: "Successful Matches", desc: "Dogs who confused each other perfectly" },
+        { number: advancedStats.confusionLevel.toFixed(1) + "%", label: "Average Confusion", desc: "How lost our users typically feel" },
+        { number: advancedStats.activeUsers.toLocaleString(), label: "Active Wooffers", desc: "Dogs currently online and confused" },
+        { number: advancedStats.averageWoofs.toFixed(1), label: "Daily Woofs/Dog", desc: "Average meaningless communications" },
+        { number: advancedStats.treatsMentioned.toLocaleString(), label: "Treats Mentioned", desc: "Most important conversation topic" },
+        { number: advancedStats.existentialCrises.toLocaleString(), label: "Existential Crises", desc: "Deep thoughts about kibble and life" },
+        { number: advancedStats.socksStolenToday.toLocaleString(), label: "Socks Stolen Today", desc: "Current sock theft statistics" }
+    ];
+
+    statsData.forEach(stat => {
+        const card = document.createElement('div');
+        card.className = 'stat-card';
+        card.innerHTML = `
+            <span class="stat-number">${stat.number}</span>
+            <div class="stat-label">${stat.label}</div>
+            <div class="stat-description">${stat.desc}</div>
+        `;
+        statsContainer.appendChild(card);
+    });
+}
+
+// Initialize Dog Data
 function initializeDogData() {
-    onlineDogs = [...dogProfiles].map((dog, index) => ({
-        ...dog,
-        id: `dog_${index}`,
-        status: Math.random() > 0.3 ? 'Online' : 'Sniffing around',
-        lastSeen: Math.random() > 0.5 ? 'Active now' : `${Math.floor(Math.random() * 30) + 1}m ago`
-    }));
+    onlineDogs = [...dogProfiles];
+}
+
+// Initialize Matched Dogs with Rich Chat History
+function initializeMatchedDogs() {
     matchedDogs = [
         {
-            ...dogProfiles[0],
-            id: 'dog_0',
-            matchTime: new Date(Date.now() - Math.random() * 86400000).toLocaleString(),
-            lastMessage: "Woof woof! *confused tail wagging*"
+            ...dogProfiles[0], // Professor Woofington
+            matchTime: new Date(Date.now() - 86400000).toLocaleString(),
+            lastMessage: "I've calculated the optimal treat-to-wag ratio!"
         },
         {
-            ...dogProfiles[2],
-            id: 'dog_2',
-            matchTime: new Date(Date.now() - Math.random() * 86400000).toLocaleString(),
-            lastMessage: "I've discovered the meaning of 'fetch'... it's existential."
+            ...dogProfiles[2], // Zen Master Biscuit
+            matchTime: new Date(Date.now() - 172800000).toLocaleString(),
+            lastMessage: "Have you found inner peace through napping?"
         },
         {
-            ...dogProfiles[4],
-            id: 'dog_4',
-            matchTime: new Date(Date.now() - Math.random() * 86400000).toLocaleString(),
-            lastMessage: "WOOF WOOF WOOF! *aggressive small dog energy*"
+            ...dogProfiles[4], // Lady Fluffington
+            matchTime: new Date(Date.now() - 259200000).toLocaleString(),
+            lastMessage: "*dramatic sigh* Nobody understands my artistic vision"
         }
     ];
-    matchedDogs.forEach(dog => {
-        if (!chatHistory[dog.id]) {
-            chatHistory[dog.id] = [];
+
+    // Initialize rich chat histories
+    chatHistory["dog_001"] = [
+        { type: 'received', content: 'WOOF! We matched! This calls for a scientific celebration! 🎉', time: getTimeString(-1440) },
+        { type: 'received', content: 'I have been researching optimal sniffing techniques. Would you like to collaborate on a peer-reviewed paper?', time: getTimeString(-1430) },
+        { type: 'sent', content: 'That sounds fascinating! What have you discovered so far?', time: getTimeString(-1420) },
+        { type: 'received', content: 'Preliminary findings suggest that 73% of successful sniffs occur within the first 3 seconds of encounter. The remaining 27% are what I call "deep investigative sniffs."', time: getTimeString(-1415) },
+        { type: 'sent', content: 'Amazing! Do you factor in treat proximity to sniff success rates?', time: getTimeString(-1410) },
+        { type: 'received', content: 'Brilliant question! Treat proximity increases sniff enthusiasm by 340%. I call this the "Pavlovian Sniff Enhancement Theory." 📊', time: getTimeString(-1405) },
+        { type: 'received', content: 'I\'ve calculated the optimal treat-to-wag ratio! It\'s approximately 1 treat per 47.3 tail wags. Science!', time: getTimeString(-60) }
+    ];
+
+    chatHistory["dog_003"] = [
+        { type: 'received', content: '*peaceful woof* 🧘 We have found each other through the cosmic forces of confusion', time: getTimeString(-2880) },
+        { type: 'sent', content: 'Hello! You seem very zen. How do you stay so calm?', time: getTimeString(-2870) },
+        { type: 'received', content: 'The secret is in accepting that humans make no sense, and finding peace in their beautiful chaos. Also, 18-hour naps help.', time: getTimeString(-2860) },
+        { type: 'sent', content: 'That\'s profound! Do you have any meditation tips for anxious dogs?', time: getTimeString(-2850) },
+        { type: 'received', content: 'Focus on your breathing... in through the nose (perfect for additional sniffing opportunities), out through the mouth. Visualize unlimited treats.', time: getTimeString(-2840) },
+        { type: 'received', content: 'Remember: every moment of confusion is a chance to achieve enlightenment. Or at least a good nap. 💤', time: getTimeString(-2830) },
+        { type: 'received', content: 'Have you found inner peace through napping? I discovered a perfect sunbeam today. Life-changing experience.', time: getTimeString(-120) }
+    ];
+
+    chatHistory["dog_005"] = [
+        { type: 'received', content: '*theatrical entrance* FINALLY! Someone who might appreciate true artistry! 👑✨', time: getTimeString(-4320) },
+        { type: 'sent', content: 'Hi! You seem quite... dramatic! I love the energy!', time: getTimeString(-4310) },
+        { type: 'received', content: 'Dramatic? DRAMATIC?! I am a PERFORMANCE ARTIST! Every sigh, every longing stare out the window - it\'s all carefully choreographed emotion!', time: getTimeString(-4300) },
+        { type: 'sent', content: 'I apologize! What\'s your latest artistic project?', time: getTimeString(-4290) },
+        { type: 'received', content: '*graciously accepts apology* Currently I\'m working on a piece called "The Tragedy of the Empty Food Bowl" - it\'s a 3-act drama performed entirely through pitiful stares', time: getTimeString(-4280) },
+        { type: 'received', content: 'The critics (my humans) are moved to tears every time. Well... they fill the bowl, so I assume those are tears of artistic appreciation 🎭', time: getTimeString(-4270) },
+        { type: 'received', content: '*dramatic sigh* Nobody understands my artistic vision... except you, perhaps? 💔', time: getTimeString(-180) }
+    ];
+}
+
+// Setup Dog Modal Functions
+function showSetupDog() {
+    document.getElementById('setupModal').classList.add('active');
+    if (userDog) {
+        document.getElementById('dogName').value = userDog.name;
+        document.getElementById('dogBreed').value = userDog.breed;
+        document.getElementById('dogBio').value = userDog.bio;
+        selectEmoji(userDog.emoji, true); // Pass true to avoid event object issue
+    }
+}
+
+function closeSetupDog() {
+    document.getElementById('setupModal').classList.remove('active');
+}
+
+function selectEmoji(emoji, fromCode = false) {
+    selectedEmoji = emoji;
+    const emojiButtons = document.querySelectorAll('.emoji-btn');
+    emojiButtons.forEach(btn => {
+        btn.classList.remove('selected');
+        if (btn.textContent === emoji) {
+            btn.classList.add('selected');
         }
     });
+
+    if (!fromCode && event && event.target) {
+        // This part runs only when an actual click happens
+        event.target.classList.add('selected');
+    }
 }
 
-// Dog Profiles functionality
-function showDogProfiles() {
-    document.getElementById('profilesModal').classList.add('active');
-    populateProfilesGrid();
-}
 
-function closeDogProfiles() {
-    document.getElementById('profilesModal').classList.remove('active');
-}
+// Handle Dog Setup Form
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('dogSetupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('dogName').value;
+        const breed = document.getElementById('dogBreed').value;
+        const bio = document.getElementById('dogBio').value;
+        
+        if (!name || !breed || !bio) {
+            alert('Please fill in all fields to create your dog\'s profile!');
+            return;
+        }
 
-function populateProfilesGrid() {
-    const grid = document.getElementById('profilesGrid');
-    grid.innerHTML = '';
-    onlineDogs.forEach(dog => {
-        const profileCard = document.createElement('div');
-        profileCard.className = 'profile-mini-card';
-        profileCard.innerHTML = `
-            <div class="mini-photo">${dog.emoji}</div>
-            <div class="mini-name">${dog.name}</div>
-            <div class="mini-breed">${dog.breed}</div>
-            <div class="mini-status">${dog.status}</div>
-            <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">${dog.lastSeen}</div>
-        `;
-        profileCard.onclick = () => {
-            const messages = [
-                "This dog is too busy contemplating existence to notice your interest.",
-                "Profile viewed! The dog now knows you were here. Awkward.",
-                "You've been detected. The dog is now hiding behind a fire hydrant.",
-                "This dog's privacy settings are set to 'Maximum Confusion'.",
-                "You cannot view this profile. The dog is in witness protection."
-            ];
-            alert(messages[Math.floor(Math.random() * messages.length)]);
+        userDog = {
+            name: name,
+            breed: breed,
+            bio: bio,
+            emoji: selectedEmoji,
+            sniffAppeal: Math.floor(Math.random() * 4) + 7,
+            chaosLevel: Math.floor(Math.random() * 10) + 1,
+            treatLevel: Math.floor(Math.random() * 3) + 8,
+            philosophyIQ: Math.floor(Math.random() * 10) + 1
         };
-        grid.appendChild(profileCard);
+
+        updateUserDogDisplay();
+        closeSetupDog();
+        
+        const welcomeMessages = [
+            `🎉 Welcome ${name} to the Sniffer community! Your chaos level of ${userDog.chaosLevel}/10 is impressive!`,
+            `${selectedEmoji} ${name} is ready to confuse and be confused! Let the sniffing begin!`,
+            `Profile created! ${name} has joined the ranks of professionally confused dogs worldwide!`,
+            `🚀 ${name} is now part of the most sophisticated nonsense network ever created for dogs!`
+        ];
+        
+        alert(welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)]);
     });
+});
+
+function updateUserDogDisplay() {
+    const display = document.getElementById('userDogDisplay');
+    const info = document.getElementById('userDogInfo');
+    
+    if (userDog) {
+        info.innerHTML = `${userDog.emoji} ${userDog.name}`;
+        display.style.display = 'block';
+    }
 }
 
-// Woof Chat functionality
+// Enhanced Chat Functions
 function showWoofChat() {
     document.getElementById('chatModal').classList.add('active');
     populateMatchesList();
@@ -278,6 +358,7 @@ function closeWoofChat() {
 function populateMatchesList() {
     const matchesList = document.getElementById('matchesList');
     matchesList.innerHTML = '';
+    
     matchedDogs.forEach(dog => {
         const matchItem = document.createElement('div');
         matchItem.className = 'match-item';
@@ -288,24 +369,23 @@ function populateMatchesList() {
                 <div class="match-preview">${dog.lastMessage}</div>
             </div>
         `;
-        matchItem.onclick = () => selectChatDog(dog);
+        matchItem.onclick = (event) => selectChatDog(dog, event.currentTarget);
         matchesList.appendChild(matchItem);
     });
 }
 
-function selectChatDog(dog) {
+function selectChatDog(dog, element) {
     currentChatDog = dog;
     document.querySelectorAll('.match-item').forEach(item => {
         item.classList.remove('active');
     });
-    event.currentTarget.classList.add('active');
+    element.classList.add('active');
     showChatInterface();
 }
 
 function showChatInterface() {
-    const chatContent = document.getElementById('chatContent');
-    chatContent.className = 'chat-main';
-    chatContent.innerHTML = `
+    const chatMain = document.getElementById('chatMain');
+    chatMain.innerHTML = `
         <div class="chat-messages" id="chatMessages">
         </div>
         <div class="chat-input-container">
@@ -313,11 +393,12 @@ function showChatInterface() {
                 <button class="woof-btn" onclick="sendQuickWoof('WOOF! 🐕')">WOOF!</button>
                 <button class="woof-btn" onclick="sendQuickWoof('*confused tail wagging*')">Confused Tail</button>
                 <button class="woof-btn" onclick="sendQuickWoof('*sniff sniff*')">Investigative Sniff</button>
-                <button class="woof-btn" onclick="sendQuickWoof('*existential crisis*')">Existential Crisis</button>
+                <button class="woof-btn" onclick="sendQuickWoof('Want to share treats? 🦴')">Share Treats?</button>
                 <button class="woof-btn" onclick="sendQuickWoof('SQUIRREL?! 🐿️')">SQUIRREL!</button>
+                <button class="woof-btn" onclick="sendQuickWoof('*existential crisis intensifies*')">Existential Crisis</button>
             </div>
             <div class="chat-input-group">
-                <input type="text" class="chat-input" placeholder="Type your woof..." id="messageInput" onkeypress="handleEnterKey(event)">
+                <input type="text" class="chat-input" placeholder="Type your profound woof..." id="messageInput" onkeypress="handleEnterKey(event)">
                 <button class="send-btn" onclick="sendMessage()">Send Woof</button>
             </div>
         </div>
@@ -329,46 +410,87 @@ function loadChatHistory() {
     const messagesContainer = document.getElementById('chatMessages');
     const history = chatHistory[currentChatDog.id] || [];
     messagesContainer.innerHTML = '';
-    if (history.length === 0) {
-        const initialMessages = [
-            { type: 'received', content: 'WOOF! We matched! *confused tail wagging*', time: getTimeString(-10) },
-            { type: 'received', content: 'I have no idea what to do now... do you?', time: getTimeString(-8) }
-        ];
-        chatHistory[currentChatDog.id] = initialMessages;
-    }
-    chatHistory[currentChatDog.id].forEach(message => {
+    
+    history.forEach(message => {
         addMessageToUI(message.type, message.content, message.time);
     });
+    
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
 function sendMessage() {
     const input = document.getElementById('messageInput');
     const message = input.value.trim();
-    if (message) {
-        const userMessage = { type: 'sent', content: message, time: getTimeString(0) };
-        chatHistory[currentChatDog.id].push(userMessage);
-        addMessageToUI('sent', message, getTimeString(0));
-        input.value = '';
-        setTimeout(() => {
-            const responses = [
-                "WOOF WOOF! *I have no idea what you just said*",
-                "*confused head tilt* Did you just... communicate?",
-                "I understood 'treat' and nothing else. TREAT?!",
-                "*tail wagging intensifies* Yes! Wait, what did you say?",
-                "My response: WOOF! *nailed it*",
-                "*existential crisis* Are we... having a conversation?",
-                "SQUIRREL! Oh wait, you're still here. WOOF!",
-                "*sniff sniff* You smell like... confusion?",
-                "I'm just going to bark and hope for the best. WOOF!",
-                "*profound stare* The treats you seek are within you."
-            ];
-            const response = responses[Math.floor(Math.random() * responses.length)];
-            const dogMessage = { type: 'received', content: response, time: getTimeString(0) };
-            chatHistory[currentChatDog.id].push(dogMessage);
-            addMessageToUI('received', response, getTimeString(0));
-            updateMatchPreview(currentChatDog.id, response);
-        }, 1000 + Math.random() * 2000);
+    if (!message) return;
+
+    const userMessage = { type: 'sent', content: message, time: getTimeString(0) };
+    chatHistory[currentChatDog.id].push(userMessage);
+    addMessageToUI('sent', message, getTimeString(0));
+    input.value = '';
+
+    // Enhanced AI responses based on dog personality
+    setTimeout(() => {
+        const response = generateSmartResponse(message, currentChatDog);
+        const dogMessage = { type: 'received', content: response, time: getTimeString(0) };
+        chatHistory[currentChatDog.id].push(dogMessage);
+        addMessageToUI('received', response, getTimeString(0));
+        updateMatchPreview(currentChatDog.id, response);
+    }, 1000 + Math.random() * 2000);
+}
+
+function generateSmartResponse(userMessage, dog) {
+    const message = userMessage.toLowerCase();
+    
+    // Professor Woofington (scientific responses)
+    if (dog.id === "dog_001") {
+        if (message.includes('treat') || message.includes('food')) {
+            return "According to my calculations, optimal treat consumption occurs at 2.7 hour intervals. Have you considered the nutritional density of your current treats? 🧮";
+        } else if (message.includes('play') || message.includes('fetch')) {
+            return "Fascinating! Fetch follows Newton's laws of motion. I've documented 247 different ball trajectories. The physics are quite elegant! ⚾";
+        } else if (message.includes('tired') || message.includes('sleep')) {
+            return "Sleep optimization is crucial! My research shows that 14.3 hours of daily sleep maximizes cognitive function and treat-detection abilities. 😴";
+        } else {
+            return "Intriguing hypothesis! Let me cross-reference this with my database of 10,000+ observed human behaviors... *thoughtful scientific woofing* 🔬";
+        }
+    }
+    
+    // Zen Master Biscuit (philosophical responses)
+    else if (dog.id === "dog_003") {
+        if (message.includes('stress') || message.includes('worried')) {
+            return "Remember, young grasshopper: anxiety is just excitement without breath. Find a sunny spot, take three deep sniffs, and let the universe provide. 🧘‍♂️";
+        } else if (message.includes('treat') || message.includes('food')) {
+            return "The wise dog does not chase treats, but allows treats to come to them through patient meditation... and strategic positioning near the kitchen. 🍪";
+        } else if (message.includes('play') || message.includes('energy')) {
+            return "True play comes from inner joy, not outer stimulation. Although, a good squeaky toy never hurt anyone's enlightenment journey. 🎾";
+        } else {
+            return "As the ancient dog wisdom says: 'The journey of a thousand sniffs begins with a single curious nose.' What does your nose tell you? 👃";
+        }
+    }
+    
+    // Lady Fluffington (dramatic responses)
+    else if (dog.id === "dog_005") {
+        if (message.includes('sad') || message.includes('upset')) {
+            return "*dramatically places paw over heart* Finally! Someone who understands the depths of canine emotion! We must suffer beautifully together! 💔";
+        } else if (message.includes('beautiful') || message.includes('pretty')) {
+            return "*strikes a pose* You have exquisite taste! I have been practicing my angles in every reflective surface. This conversation is pure poetry! ✨";
+        } else if (message.includes('treat') || message.includes('food')) {
+            return "*sighs dramatically* Sustenance is art! Each kibble, a small tragedy of consumption. Each treat, a fleeting moment of joy in this cruel, cruel world! 🎭";
+        } else {
+            return "*sweeping dramatic gesture* Your words touch my very soul! This is why I perform - to connect with kindred spirits like yourself! *artist's bow* 👑";
+        }
+    }
+    
+    // Default responses for other dogs
+    else {
+        const responses = [
+            "WOOF! I understood about 12% of that, but I'm 100% excited about it! 🎉",
+            "*confused head tilt* Wait, are we talking about treats? Because I thought I heard treats... 🦴",
+            "My brain has two thoughts: 1) You seem nice, 2) SQUIRREL! Wait, what were we talking about? 🐿️",
+            "*tail wagging intensifies* I have no idea what's happening but I'm having the BEST time! 🎾",
+            "According to my calculations (I can count to 4), this conversation is going perfectly! 🐕",
+            "*existential crisis* Are we... are we actually communicating? This is either beautiful or terrifying! 🤔"
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
     }
 }
 
@@ -396,13 +518,11 @@ function addMessageToUI(type, content, time) {
 }
 
 function updateMatchPreview(dogId, message) {
-    const matchItems = document.querySelectorAll('.match-item');
-    matchItems.forEach(item => {
-        const dog = matchedDogs.find(d => d.id === dogId);
-        if (dog && item.querySelector('.match-name').textContent === dog.name) {
-            item.querySelector('.match-preview').textContent = message.substring(0, 40) + (message.length > 40 ? '...' : '');
-        }
-    });
+    const dog = matchedDogs.find(d => d.id === dogId);
+    if (dog) {
+        dog.lastMessage = message.substring(0, 40) + (message.length > 40 ? '...' : '');
+        populateMatchesList();
+    }
 }
 
 function getTimeString(minutesOffset) {
@@ -410,380 +530,114 @@ function getTimeString(minutesOffset) {
     return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-function showMatch() {
-    const notification = document.getElementById('matchNotification');
-    notification.style.display = 'block';
-    const currentDog = dogProfiles[(currentDogIndex - 1) % dogProfiles.length];
-    const dogWithId = { ...currentDog, id: `dog_${currentDogIndex - 1}`, matchTime: new Date().toLocaleString(), lastMessage: "We matched! *confused excitement*" };
-    if (!matchedDogs.find(d => d.id === dogWithId.id)) {
-        matchedDogs.push(dogWithId);
-        chatHistory[dogWithId.id] = [];
+// Activity Feed Functions
+function initializeActivityFeed() {
+    const feed = document.getElementById('activityFeed');
+    for (let i = 0; i < 6; i++) {
+        addActivity();
     }
-    setTimeout(() => {
-        notification.style.display = 'none';
-        setTimeout(() => {
-            alert("Congratulations! You matched! Check your Woof Chat to start the most confusing conversation of your life.");
-            loadNewDog();
-        }, 100);
-    }, 2000);
-}
-
-function showBeautifulMessage(type, title, message, icon) {
-    const overlay = document.getElementById('messageOverlay');
-    const messageIcon = document.getElementById('messageIcon');
-    const messageTitle = document.getElementById('messageTitle');
-    const messageText = document.getElementById('messageText');
-    const heartsContainer = document.getElementById('floatingHearts');
-    messageIcon.textContent = icon;
-    messageTitle.textContent = title;
-    messageText.textContent = message;
-    heartsContainer.innerHTML = '';
-    overlay.classList.add('show');
-    createFloatingSymbols(type);
-}
-
-function closeMessageOverlay() {
-    const overlay = document.getElementById('messageOverlay');
-    overlay.classList.remove('show');
-    loadNewDog();
-}
-
-function createFloatingSymbols(type) {
-    const heartsContainer = document.getElementById('floatingHearts');
-    const symbols = type === 'sniff' ? ['💚', '👃', '✨', '💫'] : ['💔', '😢', '👎', '🚫'];
-    for (let i = 0; i < 8; i++) {
-        setTimeout(() => {
-            const symbol = document.createElement('div');
-            symbol.className = `heart ${type}`;
-            symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            symbol.style.left = Math.random() * 100 + '%';
-            symbol.style.animationDelay = Math.random() * 0.5 + 's';
-            heartsContainer.appendChild(symbol);
-            setTimeout(() => {
-                if (symbol.parentNode) {
-                    symbol.parentNode.removeChild(symbol);
-                }
-            }, 3000);
-        }, i * 200);
-    }
-}
-
-function passDog() {
-    const card = document.getElementById('dogCard');
-    const passIndicator = document.getElementById('passIndicator');
-    passIndicator.classList.add('show');
-    card.classList.add('swiped-left');
-    setTimeout(() => {
-        const messages = [
-            {
-                title: "Heartbreak Hotel 💔",
-                message: "You passed on true love. The dog is now crying into their kibble and writing sad poetry about rejection.",
-                icon: "😢"
-            },
-            {
-                title: "Missed Connection 🎭",
-                message: "Plot twist: That dog was actually Elon Mutt in disguise. You just rejected a tech billionaire. Oops!",
-                icon: "🤦‍♂️"
-            },
-            {
-                title: "Revenge Arc Activated ⚡",
-                message: "The dog you rejected just invented time travel out of spite. They're coming back to un-meet you.",
-                icon: "⏰"
-            },
-            {
-                title: "Soulmate Status: DENIED 💫",
-                message: "Congratulations! You just passed your soulmate. They're now dating your neighbor's cat.",
-                icon: "😱"
-            },
-            {
-                title: "Poet Doggo Activated 📝",
-                message: "The dog is now a professional sad poetry writer. Their first book: 'Swipes I Never Got' is already a bestseller.",
-                icon: "📚"
-            }
-        ];
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        setTimeout(() => {
-            showBeautifulMessage('pass', randomMessage.title, randomMessage.message, randomMessage.icon);
-        }, 200);
-    }, 500);
-}
-
-function sniffDog() {
-    const card = document.getElementById('dogCard');
-    const sniffIndicator = document.getElementById('sniffIndicator');
-    sniffIndicator.classList.add('show');
-    card.classList.add('swiped-right');
-    setTimeout(() => {
-        if (Math.random() < 0.3) {
-            setTimeout(() => {
-                showMatch();
-            }, 200);
-        } else {
-            const rejectionMessages = [
-                {
-                    title: "Sniff Rejected! 👃💔",
-                    message: "They sniffed you back... took one whiff... and immediately ran away. Your aura needs work.",
-                    icon: "🏃‍♂️"
-                },
-                {
-                    title: "False Hope Detected 🎪",
-                    message: "Mutual sniff detected! Just kidding, they blocked you and moved to another dimension.",
-                    icon: "🚫"
-                },
-                {
-                    title: "Species Preference 🐱",
-                    message: "The dog is not interested. They prefer cats. Yes, you read that right. A dog. Prefers. CATS.",
-                    icon: "😾"
-                },
-                {
-                    title: "Aroma Assessment Failed 🧪",
-                    message: "Sniff rejected. Professional analysis: You smell weird. Consider a career in perfume testing.",
-                    icon: "🧴"
-                },
-                {
-                    title: "Counter-Intelligence 🕵️",
-                    message: "The dog counter-sniffed and found you lacking in mysterious dog qualities. Try being more... doggish?",
-                    icon: "🔍"
-                },
-                {
-                    title: "Nose Washing Protocol 🧼",
-                    message: "They're washing their nose after sniffing you. With soap. Twice. The betrayal is real.",
-                    icon: "🛁"
-                }
-            ];
-            const randomMessage = rejectionMessages[Math.floor(Math.random() * rejectionMessages.length)];
-            setTimeout(() => {
-                showBeautifulMessage('pass', randomMessage.title, randomMessage.message, randomMessage.icon);
-            }, 200);
-        }
-    }, 500);
-}
-
-function showMatch() {
-    const notification = document.getElementById('matchNotification');
-    notification.style.display = 'block';
-    setTimeout(() => {
-        notification.style.display = 'none';
-        setTimeout(() => {
-            alert("Congratulations! You matched! Now what? Nobody knows. The app doesn't have messaging because that would make too much sense.");
-            loadNewDog();
-        }, 100);
-    }, 2000);
-}
-
-// Touch/drag functionality for mobile-style swiping
-function initializeSwipeEvents() {
-    const card = document.getElementById('dogCard');
-    card.addEventListener('mousedown', startDrag);
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', endDrag);
-    card.addEventListener('touchstart', startDrag);
-    document.addEventListener('touchmove', drag);
-    document.addEventListener('touchend', endDrag);
-}
-
-function startDrag(e) {
-    isDragging = true;
-    startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-    currentX = startX;
-}
-
-function drag(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-    const deltaX = currentX - startX;
-    const rotation = deltaX * 0.1;
-    const card = document.getElementById('dogCard');
-    const sniffIndicator = document.getElementById('sniffIndicator');
-    const passIndicator = document.getElementById('passIndicator');
-    card.style.transform = `translateX(${deltaX}px) rotate(${rotation}deg)`;
-    card.style.opacity = 1 - Math.abs(deltaX) / 300;
-    if (deltaX > 50) {
-        sniffIndicator.classList.add('show');
-        passIndicator.classList.remove('show');
-    } else if (deltaX < -50) {
-        passIndicator.classList.add('show');
-        sniffIndicator.classList.remove('show');
-    } else {
-        sniffIndicator.classList.remove('show');
-        passIndicator.classList.remove('show');
-    }
-}
-
-function endDrag() {
-    if (!isDragging) return;
-    isDragging = false;
-    const deltaX = currentX - startX;
-    const card = document.getElementById('dogCard');
-    const sniffIndicator = document.getElementById('sniffIndicator');
-    const passIndicator = document.getElementById('passIndicator');
-    if (Math.abs(deltaX) > 100) {
-        if (deltaX > 0) {
-            sniffDog();
-        } else {
-            passDog();
-        }
-    } else {
-        card.style.cssText = '';
-        sniffIndicator.classList.remove('show');
-        passIndicator.classList.remove('show');
-    }
-}
-
-document.getElementById('sniffModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeSniffMatch();
-    }
-});
-
-// Synthetic data for live activity
-const dogNames = [
-    "Sir Barkington", "Professor Woofles", "Captain Sniffmaster", "Duke Pawsalot",
-    "Lady Tailwagger", "Baron von Fetch", "Princess Squeaktoy", "General Goodboy",
-    "Dr. Biscuit", "Admiral Bellyrub", "Count Droolula", "Sergeant Snuggles",
-    "Rex Pawsome", "Bella Barksworth", "Max Sniffalicious", "Luna Woofington"
-];
-
-const activities = [
-    "checked their pee-mail on a very important lamp post",
-    "audited the kitchen floor for dropped snacks",
-    "ran a full marathon in their sleep",
-    "performed critical surgery to remove a squeaker",
-    "negotiated a peace treaty for a small piece of chapati",
-    "held a shareholder meeting about the treat distribution policy",
-    "practiced hypnosis to acquire more belly rubs",
-    "debated the philosophical implications of a squeaky toy",
-    "discovered that their tail is, in fact, attached to them",
-    "filed a formal complaint against the cat for trespassing",
-    "attempted to pay for a walk with a slobbery tennis ball",
-    "rearranged the couch cushions for optimal nap feng shui",
-    "sang the ancient song of their people at a passing ambulance",
-    "conducted a thorough security sweep of the backyard",
-    "calculated the exact velocity of a falling piece of roti",
-    "realized the dog in the mirror is a handsome imposter",
-    "tried to bury a bone in the couch cushions for later",
-    "experienced a moment of pure zen while chewing a slipper",
-    "warned the family about a dangerous-looking plastic bag",
-    "protected the house from the treacherous vacuum cleaner",
-    "gave a lengthy lecture to a squirrel on property rights",
-    "achieved a new personal best in 'underfoot' navigation",
-    "investigated the mysterious red dot that cannot be caught",
-    "became a connoisseur of different types of mud",
-    "pondered why the human leaves every day in the 'car monster'",
-    "mistook their own fart for an intruder",
-    "engaged in a philosophical debate with a stray cow",
-    "found the squeaker, which was the meaning of life all along",
-    "used Jedi mind tricks to get an extra biscuit",
-    "wondered if they, too, are a 'good boy'"
-];
-
-const dogEmojis = ["🐕", "🐶", "🐕‍🦺", "🐩", "🦮", "🐺"];
-let activityCounter = 0;
-let stats = {
-    sniffs: 100247,
-    confusion: 95,
-    users: 1,
-    barks: 42069
-};
-
-function generateActivity() {
-    const name = dogNames[Math.floor(Math.random() * dogNames.length)];
-    const action = activities[Math.floor(Math.random() * activities.length)];
-    const emoji = dogEmojis[Math.floor(Math.random() * dogEmojis.length)];
-    const timeAgo = Math.floor(Math.random() * 60) + 1;
-    return {
-        id: activityCounter++,
-        name: name,
-        action: action,
-        emoji: emoji,
-        time: `${timeAgo} seconds ago`
-    };
 }
 
 function addActivity() {
     const feed = document.getElementById('activityFeed');
-    const activity = generateActivity();
+    const allDogs = [...onlineDogs];
+    if (userDog) allDogs.push(userDog);
+    
+    const dog = allDogs[Math.floor(Math.random() * allDogs.length)];
+    const activity = advancedActivities[Math.floor(Math.random() * advancedActivities.length)];
+    const timeAgo = Math.floor(Math.random() * 60) + 1;
+    
     const activityHTML = `
         <div class="activity-item">
-            <div class="activity-avatar">${activity.emoji}</div>
+            <div class="activity-avatar">${dog.emoji}</div>
             <div class="activity-content">
                 <div>
-                    <span class="activity-user">${activity.name}</span>
-                    <span class="activity-action">${activity.action}</span>
+                    <span class="activity-user">${dog.name}</span>
+                    <span class="activity-action">${activity}</span>
                 </div>
-                <div class="activity-time">${activity.time}</div>
+                <div class="activity-time">${timeAgo} seconds ago</div>
             </div>
         </div>
     `;
+    
     feed.insertAdjacentHTML('afterbegin', activityHTML);
+    
     const items = feed.querySelectorAll('.activity-item');
     if (items.length > 8) {
         items[items.length - 1].remove();
     }
 }
 
-function updateStats() {
-    stats.sniffs += Math.floor(Math.random() * 10) + 1;
-    stats.confusion = Math.min(99, stats.confusion + (Math.random() - 0.5));
-    stats.barks += Math.floor(Math.random() * 5) + 1;
-    if (Math.random() < 0.1) {
-        stats.users = Math.floor(Math.random() * 4);
-    }
-    document.getElementById('sniffCount').textContent = stats.sniffs.toLocaleString();
-    document.getElementById('confusionLevel').textContent = stats.confusion.toFixed(1) + '%';
-    document.getElementById('userCount').textContent = stats.users;
-    document.getElementById('barkCount').textContent = stats.barks.toLocaleString();
-    const statElements = [
-        document.getElementById('sniffCount'),
-        document.getElementById('confusionLevel'),
-        document.getElementById('userCount'),
-        document.getElementById('barkCount')
+// Advanced Stats Updates
+function updateAdvancedStats() {
+    advancedStats.totalSniffs += Math.floor(Math.random() * 50) + 10;
+    advancedStats.successfulMatches += Math.floor(Math.random() * 5) + 1;
+    advancedStats.activeUsers += Math.floor(Math.random() * 20) - 10;
+    advancedStats.averageWoofs += (Math.random() - 0.5) * 2;
+    advancedStats.treatsMentioned += Math.floor(Math.random() * 15) + 5;
+    advancedStats.existentialCrises += Math.floor(Math.random() * 3);
+    advancedStats.socksStolenToday += Math.floor(Math.random() * 8) + 1;
+    
+    // Update display
+    const statCards = document.querySelectorAll('.stat-card .stat-number');
+    const statsArray = [
+        advancedStats.totalSniffs.toLocaleString(),
+        advancedStats.successfulMatches.toLocaleString(),
+        advancedStats.confusionLevel.toFixed(1) + "%",
+        Math.max(0, advancedStats.activeUsers).toLocaleString(),
+        Math.max(0, advancedStats.averageWoofs).toFixed(1),
+        advancedStats.treatsMentioned.toLocaleString(),
+        advancedStats.existentialCrises.toLocaleString(),
+        advancedStats.socksStolenToday.toLocaleString()
     ];
-    const randomStat = statElements[Math.floor(Math.random() * statElements.length)];
-    randomStat.style.animation = 'pulse 0.5s ease-in-out';
-    setTimeout(() => {
-        randomStat.style.animation = '';
-    }, 500);
+    
+    statCards.forEach((card, index) => {
+        if (statsArray[index]) {
+            card.textContent = statsArray[index];
+            card.style.animation = 'pulse 0.5s ease-in-out';
+            setTimeout(() => {
+                card.style.animation = '';
+            }, 500);
+        }
+    });
 }
 
-function initializeData() {
-    for (let i = 0; i < 5; i++) {
-        addActivity();
-    }
+// Start Advanced Updates
+function startAdvancedUpdates() {
+    setInterval(addActivity, Math.random() * 5000 + 3000);
+    setInterval(updateAdvancedStats, Math.random() * 8000 + 5000);
 }
 
-function startLiveUpdates() {
-    setInterval(addActivity, Math.random() * 4000 + 3000);
-    setInterval(updateStats, Math.random() * 3000 + 2000);
+// Utility Functions
+function scrollToFeatures() {
+    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
 }
 
+function scrollToStats() {
+    document.getElementById('stats').scrollIntoView({ behavior: 'smooth' });
+}
+
+function scrollToActivity() {
+    document.getElementById('activity').scrollIntoView({ behavior: 'smooth' });
+}
+function scrollToDownload() {
+    document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
+}
+
+function reportCat() {
+    const reports = [
+        "🚨 Cat Alert: Feline infiltration detected and reported to the Department of Canine Affairs!",
+        "📋 Report filed: One (1) suspicious cat spotted exhibiting un-dog-like behavior",
+        "⚖️ Cat successfully prosecuted for crimes against dog-kind. Sentence: mandatory belly rubs",
+        "🕵️ Investigation complete: Cat found guilty of being too independent. Case closed."
+    ];
+    alert(reports[Math.floor(Math.random() * reports.length)]);
+}
+
+// Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    initializeData();
-    startLiveUpdates();
-    initializeSwipeEvents();
+    initializeApp();
 });
-
-function startSniffing() {
-    const messages = [
-        "Error: Please insert dog nose to continue",
-        "Calibrating sniff sensitivity...",
-        "Unable to locate nearby butts",
-        "Your dog is not compatible with technology",
-        "Please bark three times and try again",
-        "Sniffing servers are down for maintenance",
-        "Feature only works during full moon"
-    ];
-    alert(messages[Math.floor(Math.random() * messages.length)]);
-}
-
-function wobbleCard(card) {
-    card.style.animation = 'wobble 0.5s ease-in-out';
-    setTimeout(() => {
-        card.style.animation = '';
-    }, 500);
-}
-
 function fakeDownload(store) {
     alert(`${store} rejected our app for "not making any sense." We're appealing to the Supreme Court of Dogs.`);
 }
@@ -791,39 +645,3 @@ function fakeDownload(store) {
 function rickRoll() {
     window.open('http://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
 }
-
-function openSource() {
-    alert('Our code is so revolutionary, even we don\'t understand it. Check back never.');
-}
-
-function reportCat() {
-    const reports = [
-        "Cat successfully reported to the Department of Canine Affairs",
-        "Alert: Feline infiltration detected. Deploying emergency squeaky toys",
-        "Cat report filed under 'Extremely Suspicious Behavior'",
-        "Thank you. The cat has been sentenced to mandatory belly rubs"
-    ];
-    alert(reports[Math.floor(Math.random() * reports.length)]);
-}
-
-document.addEventListener('click', function() {
-    if (Math.random() < 0.1) {
-        console.log('WOOF! 🐕');
-    }
-});
-
-let konamiCode = [];
-const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-document.addEventListener('keydown', function(e) {
-    konamiCode.push(e.code);
-    if (konamiCode.length > konamiSequence.length) {
-        konamiCode.shift();
-    }
-    if (konamiCode.join('') === konamiSequence.join('')) {
-        alert('🐕 ULTIMATE SNIFF MODE ACTIVATED! 🐕\nYou are now 500% more dog than before!');
-        document.body.style.transform = 'rotate(1deg)';
-        setTimeout(() => {
-            document.body.style.transform = 'rotate(0deg)';
-        }, 2000);
-    }
-});
